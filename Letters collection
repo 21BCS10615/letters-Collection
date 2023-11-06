@@ -1,0 +1,41 @@
+class Solution{
+public:
+    vector<int> matrixSum(int n, int m, vector<vector<int>> mat, int q, vector<int> queries[])
+    {
+        // code here
+         vector<int> answer;
+    
+    vector<int> i1 = {-1, -1, -1, 0, 0, 1, 1, 1};
+    vector<int> j1 = {-1, 0, 1, -1, 1, -1, 0, 1};
+    vector<int> i2 = {-2, -2, -2, -2, -2, -1, -1, 0, 0, 1, 1, 2, 2, 2, 2, 2};
+    vector<int> j2 = {-2, -1, 0, 1, 2, -2, 2, -2, 2, -2, 2, -2, -1, 0, 1, 2};
+
+    for (int i = 0; i < q; i++) {
+        int sum = 0;
+        int x = queries[i][1];
+        int y = queries[i][2];
+
+        if (queries[i][0] == 1) {
+            for (int k = 0; k < 8; k++) {
+                int numx = x + i1[k];
+                int numy = y + j1[k];
+                if (numx >= 0 && numx < n && numy >= 0 && numy < m) {
+                    sum += mat[numx][numy];
+                }
+            }
+        } else {
+            for (int k = 0; k < 16; k++) {
+                int numx = x + i2[k];
+                int numy = y + j2[k];
+                if (numx >= 0 && numx < n && numy >= 0 && numy < m) {
+                    sum += mat[numx][numy];
+                }
+            }
+        }
+
+        answer.push_back(sum);
+    }
+    
+    return answer;
+    }
+};
